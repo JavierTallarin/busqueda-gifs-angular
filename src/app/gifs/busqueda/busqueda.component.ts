@@ -10,15 +10,15 @@ export class BusquedaComponent {
   
   @ViewChild('txtBuscar') //busca una referencia local de un #txtBuscar
   txtBuscar!:ElementRef<HTMLInputElement>; //non null assertion operator
-  constructor( private gifsService: GifsService){
 
-  }
+  constructor( private gifsService: GifsService){}
+
   buscar() {
     console.log(this.txtBuscar);
     const value = this.txtBuscar.nativeElement.value;
 
     if( value.trim().length != 0)
-      this.gifsService.buscarGifs(value);
+      this.gifsService.buscarGifsF(value);
     else
       console.log('no se puede insertar');
     

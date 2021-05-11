@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { GifsModule } from 'src/app/gifs/gifs.module';
+import { Component} from '@angular/core';
 import { GifsService } from '../../gifs/services/gifs.service';
 
 @Component({
