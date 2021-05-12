@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Gif, SearchGifsResponse } from '../interfaces/gifs.interface';
 
 
@@ -9,7 +9,8 @@ import { Gif, SearchGifsResponse } from '../interfaces/gifs.interface';
 export class GifsService {
   private _historial: string[] = [];
   private _apikey: string = '42zPwsXqYogLseZu5CzPuYTWMhCsamSQ';
-  private _base_url: string = 'https://api.giphy.com/v1/gifs/search?api_key='
+  private _base_url: string = 'https://api.giphy.com/v1/gifs'
+  private _limit: number = 10;
   public resultados: Gif[] = [];
 
   constructor(private  http: HttpClient) { 
@@ -18,6 +19,7 @@ export class GifsService {
     //   this._historial = JSON.parse( localStorage.getItem('historial')! );
     // }
     this._historial = JSON.parse( localStorage.getItem('historial')!) || [];
+    this.resultados = JSON.parse( localStorage.getItem('resultados')!) || [];
   }
 
   get historial(){
@@ -35,12 +37,19 @@ export class GifsService {
       this._historial = this._historial.splice(0,10); //manter un historial de 10 elementos      
       localStorage.setItem('historial', JSON.stringify(this.historial));
     }
-
-    this.http.get<SearchGifsResponse>(`${this._base_url}${this._apikey}&limit=10&q=${query}`)
+    const params = new HttpParams()
+          .set('api_key', this._apikey)
+          .set('limit', this._limit.toString())
+          .set('q', query);
+    
+    console.log(params.toString());
+    
+         
+    this.http.get<SearchGifsResponse>(`${this._base_url}/search`, {params})
     .subscribe( ( resp ) => {
       console.log(resp.data);
       this.resultados = resp.data; //se visualizara desde resultados.component
-      
+      localStorage.setItem('resultados', JSON.stringify(this.resultados));
     })
 
 

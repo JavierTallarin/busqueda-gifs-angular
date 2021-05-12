@@ -9,7 +9,7 @@
     <div class="list-group list-reset">
      
         <!-- abajo se usara un pipe para hacer un uppercase -->
-    <a *ngFor="let item of obtenerHistorial(); let i = index" href="#" class="list-group-item list-group-item-action" >{{i+1}}-{{item | titlecase}}</a>
+    <a *ngFor="let item of obtenerHistorial(); let i = index" href="#" (click)="buscar(item)" class="list-group-item list-group-item-action" >{{i+1}}-{{item | titlecase}}</a>
     
     </div>
      
