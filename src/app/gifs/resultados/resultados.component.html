@@ -2,11 +2,30 @@
     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur earum hic at explicabo quis harum perspiciatis corrupti sapiente animi, et, dolorem neque architecto blanditiis. Illum voluptate culpa voluptates iusto nulla.
 </p>
 
-<ul>
+<!-- <ul>
     <li *ngFor="let item of resultados; let id = index">
         {{id+1}} - {{item.title}}
         
     </li>
 
 
-</ul>
+</ul> -->
+
+<div class="row">
+    <div *ngFor="let item of resultados; let id = index"
+        class="col-md-4 col-sm-6">
+        <div class="card">
+            <img class="card-img-top" [src]="item.images.downsized_medium.url" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{item.title}}</h5>
+                <p class="card-text">
+                    descripcion gif
+                </p>
+                <a [href]="item.images.downsized_medium.url" class="btn btn-primary">Go somewhere</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
